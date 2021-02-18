@@ -1,0 +1,14 @@
+- hosts: all
+  tasks: []
+
+- hosts: dokku
+
+  tasks:
+    - name: Download Dokku
+      get_url:
+        url: https://raw.githubusercontent.com/dokku/dokku/v0.23.6/bootstrap.sh
+        dest: ./bootstrap.sh 
+
+    - name: Install Dokku
+      shell: DOKKU_TAG=v0.23.6 bash bootstrap.sh
+      become: true
