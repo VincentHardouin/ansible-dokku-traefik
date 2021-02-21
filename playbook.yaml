@@ -6,13 +6,14 @@
   tasks:
     - name: Download Dokku
       get_url:
-        url: https://raw.githubusercontent.com/dokku/dokku/v0.23.6/bootstrap.sh
+        url: https://raw.githubusercontent.com/dokku/dokku/v0.23.7/bootstrap.sh
         dest: ./bootstrap.sh 
 
     - name: Install Dokku
-      shell: DOKKU_TAG=v0.23.6 bash bootstrap.sh
+      shell: DOKKU_TAG=v0.23.7 bash bootstrap.sh
       become: true
 
     - name: Install Dokku Postgres Plugin
       shell: dokku plugin:install https://github.com/dokku/dokku-postgres.git  
       become: true  
+      
