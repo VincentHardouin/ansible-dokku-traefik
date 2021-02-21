@@ -12,3 +12,7 @@
     - name: Install Dokku
       shell: DOKKU_TAG=v0.23.6 bash bootstrap.sh
       become: true
+
+    - name: Install Dokku Postgres Plugin
+      shell: dokku plugin:install https://github.com/dokku/dokku-postgres.git  
+      become: true  
