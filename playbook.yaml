@@ -2,6 +2,8 @@
   tasks: []
 
 - hosts: dokku
+  vars_files:
+    - ./vars/app-env.yaml
 
   tasks:
     - name: Download Dokku
@@ -16,4 +18,11 @@
     - name: Install Dokku Postgres Plugin
       shell: dokku plugin:install https://github.com/dokku/dokku-postgres.git  
       become: true  
-      
+
+    - name: Copy SSH Key
+      shell: echo "{{SSH_KEY_PUB}}" > ~/{{SSH_KEY_NAME}}.pub
+
+    - name: Add ssh key to Dokku
+      shell: dokku ssh-keys:add {{SSH_KEY_NAME}} {{SSH_KEY_NAME}}.pub
+      become: true
+    
