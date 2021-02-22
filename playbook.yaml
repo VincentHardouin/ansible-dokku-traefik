@@ -25,4 +25,8 @@
     - name: Add ssh key to Dokku
       shell: dokku ssh-keys:add {{SSH_KEY_NAME}} {{SSH_KEY_NAME}}.pub
       become: true
+
+    - name: Stop Dokku Installer
+      shell: service dokku-installer stop
+      become: true  
     
