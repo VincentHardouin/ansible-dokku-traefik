@@ -5,10 +5,11 @@ Vagrant.configure("2") do |config|
     end
   end
 
-  config.vm.box = "ubuntu/focal64"
+  config.vm.box = "debian/buster64"
 
   config.vm.network "public_network", bridge: "en0: Wi-Fi (Wireless)"
   config.vm.network "private_network", ip: "192.168.2.10"
+  config.vm.hostname = "dokku.local"
 
   config.vm.provider "virtualbox" do |v|
     v.memory = 1024
