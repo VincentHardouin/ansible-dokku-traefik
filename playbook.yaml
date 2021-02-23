@@ -5,28 +5,15 @@
   vars_files:
     - ./vars/app-env.yaml
 
-  tasks:
-    - name: Download Dokku
-      get_url:
-        url: https://raw.githubusercontent.com/dokku/dokku/v0.23.7/bootstrap.sh
-        dest: ./bootstrap.sh 
-
-    - name: Install Dokku
-      shell: DOKKU_TAG=v0.23.7 bash bootstrap.sh
-      become: true
-
-    - name: Install Dokku Postgres Plugin
-      shell: dokku plugin:install https://github.com/dokku/dokku-postgres.git  
-      become: true  
-
-    - name: Copy SSH Key
-      shell: echo "{{SSH_KEY_PUB}}" > ~/{{SSH_KEY_NAME}}.pub
-
-    - name: Add ssh key to Dokku
-      shell: dokku ssh-keys:add {{SSH_KEY_NAME}} {{SSH_KEY_NAME}}.pub
-      become: true
-
-    - name: Stop Dokku Installer
-      shell: service dokku-installer stop
-      become: true  
+  roles:
+    - { role: dokku_bot.ansible_dokku, become: yes }
+    
+  vars:
+    dokku_plugins:
+      - name: postgres
+        url: https://github.com/dokku/dokku-postgres.git
+    dokku_users:
+      - name: vincent
+        username: "{{ SSH_KEY_NAME }}"
+        ssh_key: "{{ SSH_KEY_PUB }}"
     
