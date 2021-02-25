@@ -5,6 +5,21 @@
   vars_files:
     - ./vars/app-env.yaml
 
+  pre_tasks:
+    - name: Create nginx directory
+      file:
+        path: /etc/nginx/conf.d
+        state: directory
+        mode: '755'
+      become: true
+
+    - name: Install default nginx conf for Dokku
+      copy:
+        src: conf/nginx-default-vhost.conf
+        dest: /etc/nginx/conf.d/00-default-vhost.conf
+        mode: '755'
+      become: true
+
   roles:
     - { role: dokku_bot.ansible_dokku, become: yes }
     
@@ -17,3 +32,33 @@
         username: "{{ SSH_KEY_NAME }}"
         ssh_key: "{{ SSH_KEY_PUB }}"
     
+  tasks:
+    - name: Kill default nginx
+      command: pkill nginx
+      become: true
+
+    - name: Create Traefik directory
+      file:
+        path: /home/traefik
+        state: directory
+        mode: '755'
+      become: true
+
+    - name: Copy docker-compose for Traefik
+      copy:
+        src: conf/docker-compose.yml
+        dest: /home/traefik/docker-compose.yml
+        mode: '777'
+      become: true
+
+    - name: Copy conf for Traefik
+      copy:
+        src: conf/traefik.yml
+        dest: /home/traefik/traefik.yml
+        mode: '777'
+      become: true
+
+    - name: Run Traefik on docker
+      command: chdir=/home/traefik docker-compose up -d
+      become: true
+      register: traefik_installed
