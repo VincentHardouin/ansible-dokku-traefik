@@ -13,10 +13,17 @@
         mode: '755'
       become: true
 
-    - name: Install default nginx conf for Dokku
+    - name: Install default vhost nginx conf for Dokku
       copy:
         src: conf/nginx-default-vhost.conf
         dest: /etc/nginx/conf.d/00-default-vhost.conf
+        mode: '755'
+      become: true
+
+    - name: Install default nginx conf for Dokku
+      copy:
+        src: conf/default-nginx.conf
+        dest: /etc/nginx/conf.d/default.conf
         mode: '755'
       become: true
 
