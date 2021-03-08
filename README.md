@@ -1,9 +1,9 @@
 # Ansible for Traefik & Dokku 
 
-We need to provide some server with some many tools, like frontend + backend, and another apps. 
-And we want to serve all service thanks to a reverse-proxy.
+We need to provide some servers with many tools, like frontend + backend, and other apps. 
+And we want to serve all services thanks to a reverse-proxy.
 
-For that, I propose this playbook. It install [Dokku](https://dokku.com/), it's small PaaS to deploy some apps like Heroku but it allow to have some other tools like run a docker-compose or anything else. 
+For that, I propose this playbook. It installs [Dokku](https://dokku.com/), it's a small PaaS to deploy many apps like Heroku but it allows us to have other tools and run a docker-compose or anything else. 
  
  
 ## How it works 
@@ -11,9 +11,9 @@ For that, I propose this playbook. It install [Dokku](https://dokku.com/), it's 
 
 ## Why change Dokku default nginx config ? 
 
-Traefik need to listen on port :80 to serve on other intern service. 
+Traefik needs to listen on port :80 to serve on other intern services.
 And if Dokku use also port 80, Traefik can’t work. 
-To resolve that, I decide to change Dokku config to listen in localhost 
+To solve that, I decided to change nginx Dokku config for it to listen in localhost:1000
 
 ## Getting Started 
 
@@ -37,7 +37,7 @@ cp vars/sample.app-env.yaml vars/app-env.yaml
 
 4. Fill vars : 
 - `SSH_KEY_PUB` for your personal ssh key pub `etc/.ssh/_.pub`.
-- `SSH_KEY_NAME` name associate to your key, it's create Dokku user with this name. 
+- `SSH_KEY_NAME` name associated to your key, it creates Dokku user with this name. 
 
 3. Run Ansible provision : 
 
