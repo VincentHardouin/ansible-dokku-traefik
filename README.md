@@ -48,7 +48,7 @@ ansible-playbook playbook.yaml
 4. Access 
 
 ## How to use ? 
-If you want use Dokku to deploy your app you simply need to connect to your server with ssh : create app and deploy 
+If you want to use Dokku to deploy your app you simply need to connect to your server with ssh : create app and deploy 
 
 ## How to use with Vagrant 
 
