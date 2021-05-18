@@ -3,7 +3,7 @@
 We need to provide some servers with many tools, like frontend + backend, and other apps. 
 And we want to serve all services thanks to a reverse-proxy.
 
-For that, I propose this playbook. It installs [Dokku](https://dokku.com/), it's a small PaaS to deploy many apps like Heroku but it allows us to have other tools and run a docker-compose or anything else. 
+For that, I suggest this playbook. It installs [Dokku](https://dokku.com/), it's a small PaaS to deploy many apps like Heroku but it allows us to have other tools and run a docker-compose or anything else. 
  
  
 ## How it works 
